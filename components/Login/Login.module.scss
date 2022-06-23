@@ -1,0 +1,28 @@
+.Wrapper {
+  overflow-y: hidden;
+  height: 100%;
+  display: flex;
+  color: #FFFFFF;
+
+  input{
+    width: 300px;
+  }
+}
+.loginForm {
+  display: flex;
+  flex: 2;
+  background: radial-gradient(
+    64.58% 54.54% at 50% 50%,
+    #396870 0%,
+    #08383b 100%
+  );
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Logo {
+position: absolute;
+top: 30%;
+right: 17%;
+}

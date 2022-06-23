@@ -1,5 +1,17 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@design-system/*": ["./src/design-system/*"],
+      "@config": ["./config.ts"],
+      "@styles/*": ["./src/styles/*"],
+      "@src/*": ["./src/*"],
+      "@graphql/*": ["./src/graphql-documents/*"],
+      "@components/*": ["./components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@client/*": ["./src/client/*"],
+      "@public/*": ["./public/*"],
+      "@mock-data/*": ["./src/mock-data/*"]
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
