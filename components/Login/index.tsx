@@ -3,7 +3,23 @@ import styles from './Login.module.scss';
 import Image from 'next/image';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-const index = () => {
+import { Controller, useForm } from 'react-hook-form';
+type FormInputs = {
+  email: string;
+  password: string;
+};
+const Login: React.FC = () => {
+  const {
+    handleSubmit,
+    formState: { errors, isDirty, isValid },
+    control,
+  } = useForm<FormInputs>({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
   return (
     <div className={styles.Wrapper}>
       <div className={styles.loginImg}>
@@ -14,37 +30,60 @@ const index = () => {
           <Image src="/images/Logo.png" alt="Curv" width={200} height={50} />
         </div>
         <form>
-          <TextField
-            label="Email"
-            placeholder="Email"
-            sx={{
-              label: {
-                color: '#fff',
-              },
-            }}
+          <Controller
+            name="email"
+            rules={{ required: 'Email is required' }}
+            control={control}
+            render={() => (
+              <TextField
+                label="Email"
+                placeholder="Email"
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                sx={{
+                  label: {
+                    color: '#fff',
+                  },
+                }}
+              />
+            )}
           />
-          <TextField
-            label="Password"
-            placeholder="Password"
-            sx={{
-              margin: '10px',
-              label: {
-                color: '#fff',
-              },
-            }}
+
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: 'Password is required' }}
+            render={() => (
+              <TextField
+                label="Password"
+                placeholder="Password"
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                sx={{
+                  margin: '10px',
+                  label: {
+                    color: '#fff',
+                  },
+                }}
+              />
+            )}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            // size="large"
-            // style={{ marginTop: '20px' }}
-          >
-            LOGIN
-          </Button>
+
+          <div className={styles.loginButton}>
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              // style={{ marginTop: '20px' }}
+              // disabled={!isValid || !isDirty}
+            >
+              LOGIN
+            </Button>
+          </div>
         </form>
       </div>
     </div>
   );
 };
 
-export default index;
+export default Login;
