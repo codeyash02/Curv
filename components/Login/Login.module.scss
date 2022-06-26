@@ -1,14 +1,14 @@
 .Wrapper {
-  overflow-y: hidden;
-  height: 100%;
   display: flex;
-  color: #FFFFFF;
+  color: #ffffff;
+  height: 1152px;
 
-  input{
-    width: 300px;
+  input {
+    width: 400px;
+  
   }
 }
-.loginForm {
+.loginFormWrapper {
   display: flex;
   flex: 2;
   background: radial-gradient(
@@ -19,10 +19,14 @@
   text-align: center;
   justify-content: center;
   flex-direction: column;
-}
+  margin-bottom: 140px;
 
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .Logo {
-position: absolute;
-top: 30%;
-right: 17%;
+  margin-bottom: 50px;
 }

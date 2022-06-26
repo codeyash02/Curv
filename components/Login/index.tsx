@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import styles from './Login.module.scss';
 import Image from 'next/image';
 import TextField from '@mui/material/TextField';
@@ -20,31 +20,42 @@ const Login: React.FC = () => {
       password: '',
     },
   });
+  const onSubmit = (formData: FormInputs) => {
+    console.log(formData, 'formData');
+  };
   return (
     <div className={styles.Wrapper}>
       <div className={styles.loginImg}>
-        <Image src="/images/Login.png" alt="Curv" width={800} height={840} />
+        <Image
+          src="/images/Login.png"
+          alt="Curv"
+          width={800}
+          height={990}
+          objectFit={'cover'}
+        />
       </div>
-      <div className={styles.loginForm}>
+      <div className={styles.loginFormWrapper}>
         <div className={styles.Logo}>
           <Image src="/images/Logo.png" alt="Curv" width={200} height={50} />
         </div>
-        <form>
+        <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="email"
             rules={{ required: 'Email is required' }}
             control={control}
-            render={() => (
+            render={({ field }) => (
               <TextField
                 label="Email"
                 placeholder="Email"
+                className={styles.formInput}
                 error={!!errors.email}
                 helperText={errors.email?.message}
                 sx={{
                   label: {
-                    color: '#fff',
+                    color: '#ffffff',
                   },
                 }}
+                {...field}
               />
             )}
           />
@@ -53,33 +64,33 @@ const Login: React.FC = () => {
             name="password"
             control={control}
             rules={{ required: 'Password is required' }}
-            render={() => (
+            render={({ field }) => (
               <TextField
                 label="Password"
                 placeholder="Password"
+                className={styles.formInput}
                 error={!!errors.password}
                 helperText={errors.password?.message}
                 sx={{
                   margin: '10px',
                   label: {
-                    color: '#fff',
+                    color: '#ffffff',
                   },
                 }}
+                {...field}
               />
             )}
           />
 
-          <div className={styles.loginButton}>
-            <Button
-              type="submit"
-              variant="contained"
-              size="large"
-              // style={{ marginTop: '20px' }}
-              // disabled={!isValid || !isDirty}
-            >
-              LOGIN
-            </Button>
-          </div>
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            style={{ marginTop: '20px', width: '150px' }}
+            // disabled={!isValid || !isDirty}
+          >
+            LOGIN
+          </Button>
         </form>
       </div>
     </div>
