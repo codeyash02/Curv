@@ -1,0 +1,11 @@
+mutation Adminlogin($input: adminlogin) {
+  adminlogin(input: $input) {
+    message
+    status
+    data {
+      fullName
+      email
+      role
+    }
+  }
+}

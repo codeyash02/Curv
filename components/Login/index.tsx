@@ -4,11 +4,19 @@ import Image from 'next/image';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
+import AUTH_BASIC from '@graphql-documents/AUTH_BASIC.graphql';
+import { toast, Toaster } from 'react-hot-toast';
+
+import { get } from '@lib/utils';
+import { useMutation } from '@apollo/client';
+import Router, { useRouter } from 'next/router';
 type FormInputs = {
   email: string;
   password: string;
 };
 const Login: React.FC = () => {
+  const [Login] = useMutation(AUTH_BASIC);
+  const rouer = useRouter();
   const {
     handleSubmit,
     formState: { errors, isDirty, isValid },
@@ -20,8 +28,21 @@ const Login: React.FC = () => {
       password: '',
     },
   });
-  const onSubmit = (formData: FormInputs) => {
+  const onSubmit = async (formData: FormInputs) => {
     console.log(formData, 'formData');
+    const result = await Login({
+      variables: {
+        input: formData,
+      },
+    });
+    const loginData = get(result, 'data.adminlogin');
+
+    console.log(loginData, 'loginData');
+    if (loginData?.data) {
+      Router.push('/dashboard');
+    } else {
+      toast.error(loginData.message);
+    }
   };
   return (
     <div className={styles.Wrapper}>
@@ -87,12 +108,13 @@ const Login: React.FC = () => {
             variant="contained"
             size="large"
             style={{ marginTop: '20px', width: '150px' }}
-            // disabled={!isValid || !isDirty}
+            disabled={!isValid || !isDirty}
           >
             LOGIN
           </Button>
         </form>
       </div>
+      <Toaster position="bottom-center" />
     </div>
   );
 };

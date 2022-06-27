@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
     "paths": {
-      "@design-system/*": ["./src/design-system/*"],
       "@config": ["./config.ts"],
-      "@styles/*": ["./src/styles/*"],
+      "@styles/*": [".styles/*"],
       "@src/*": ["./src/*"],
-      "@graphql/*": ["./src/graphql-documents/*"],
+      "@graphql/*": ["./graphql-documents/*"],
       "@components/*": ["./components/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@client/*": ["./src/client/*"],
+      "@lib/*": ["./lib/*"],
+      "@client/*": ["./c/client/*"],
       "@public/*": ["./public/*"],
-      "@mock-data/*": ["./src/mock-data/*"]
     },
+    "baseUrl": ".",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -21,6 +20,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
